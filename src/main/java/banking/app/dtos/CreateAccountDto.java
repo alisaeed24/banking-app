@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDto {
-
-    private Long id;
+public class CreateAccountDto {
     private String accountHandlerName;
     private double balance;
-
 }
