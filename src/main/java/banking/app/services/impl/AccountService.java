@@ -7,7 +7,9 @@ import banking.app.repositories.AccountRepository;
 import banking.app.services.IAccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountService implements IAccountService {
 
     @Autowired
@@ -23,8 +25,12 @@ public class AccountService implements IAccountService {
 
     @Override
     public AccountDto createAccount(CreateAccountDto createAccountDto) {
+        System.out.println("Saved Account: " + createAccountDto); // Debug log
         Account account = modelMapper.map(createAccountDto, Account.class);
         Account savedAccount = accountRepository.save(account);
-        return modelMapper.map(savedAccount, AccountDto.class);
+        System.out.println("Saved Account: " + savedAccount); // Debug log
+        AccountDto responseDto = modelMapper.map(savedAccount, AccountDto.class);
+        System.out.println("Response DTO: " + responseDto); // Debug log
+        return responseDto;
     }
 }
