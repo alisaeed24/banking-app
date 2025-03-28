@@ -3,6 +3,7 @@ package banking.app.services;
 
 import banking.app.dtos.AccountDto;
 import banking.app.dtos.CreateAccountDto;
+import banking.app.exception.AccountException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

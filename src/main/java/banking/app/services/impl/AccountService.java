@@ -2,6 +2,7 @@ package banking.app.services.impl;
 
 import banking.app.dtos.AccountDto;
 import banking.app.dtos.CreateAccountDto;
+import banking.app.exception.AccountException;
 import banking.app.models.Account;
 import banking.app.repositories.AccountRepository;
 import banking.app.services.IAccountService;
@@ -45,25 +46,25 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public AccountDto getAccountById(Long id) {
+    public AccountDto getAccountById(Long id){
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
+                .orElseThrow(() -> new AccountException("Account not found with id: " + id));
         return modelMapper.map(account, AccountDto.class);
     }
 
     @Override
-    public AccountDto deposit(Long id, double amount) {
+    public AccountDto deposit(Long id, double amount){
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
+                .orElseThrow(() -> new AccountException("Account not found with id: " + id));
         account.setBalance(account.getBalance() + amount);
         Account savedAccount =  accountRepository.save(account);
         return modelMapper.map(savedAccount, AccountDto.class);
     }
 
     @Override
-    public AccountDto withdraw(Long id, double amount) {
+    public AccountDto withdraw(Long id, double amount){
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
+                .orElseThrow(() -> new AccountException("Account not found with id: " + id));
         if(account.getBalance() < amount){
             throw new RuntimeException("Insufficient Amount!!");
         }
@@ -75,7 +76,7 @@ public class AccountService implements IAccountService {
     @Override
     public void delete(Long id) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
+                .orElseThrow(() -> new AccountException("Account not found with id: " + id));
         accountRepository.delete(account);
     }
 }
