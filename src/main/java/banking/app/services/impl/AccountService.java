@@ -40,4 +40,13 @@ public class AccountService implements IAccountService {
                 .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
         return modelMapper.map(account, AccountDto.class);
     }
+
+    @Override
+    public AccountDto deposit(Long id, double amount) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
+        account.setBalance(account.getBalance() + amount);
+        Account savedAccount =  accountRepository.save(account);
+        return modelMapper.map(savedAccount, AccountDto.class);
+    }
 }

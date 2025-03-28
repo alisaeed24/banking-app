@@ -10,4 +10,6 @@ public interface IAccountService {
 
     public AccountDto createAccount(CreateAccountDto createAccountDto);
     public AccountDto getAccountById(Long id);
+    public AccountDto deposit(Long id, double amount);
+
 }
