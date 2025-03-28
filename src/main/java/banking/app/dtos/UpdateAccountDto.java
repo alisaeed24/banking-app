@@ -11,5 +11,4 @@ public class UpdateAccountDto {
     private Long id;
     private String accountHolderName;
     private double balance;
-
 }

@@ -55,6 +55,14 @@ public class AccountController {
     public ResponseEntity<AccountDto> withdraw(@RequestBody WithdrawDto request){
         return new ResponseEntity<>(accountService.withdraw(request.getId(), request.getAmount()), HttpStatus.OK);
     }
+
+    //Delete account Rest API
+    @DeleteMapping("/delete")
+    public ResponseEntity delete(@RequestBody Map<String, Long> request){
+        Long id = request.get("id");
+        accountService.delete(id);
+        return  ResponseEntity.ok("Account deleted successfully");
+    }
 }
 
 

@@ -15,5 +15,6 @@ public interface IAccountService {
     public AccountDto getAccountById(Long id);
     public AccountDto deposit(Long id, double amount);
     public AccountDto withdraw(Long id, double amount);
+    public void delete(Long id);
 
 }
