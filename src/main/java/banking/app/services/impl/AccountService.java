@@ -49,4 +49,16 @@ public class AccountService implements IAccountService {
         Account savedAccount =  accountRepository.save(account);
         return modelMapper.map(savedAccount, AccountDto.class);
     }
+
+    @Override
+    public AccountDto withdraw(Long id, double amount) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
+        if(account.getBalance() < amount){
+            throw new RuntimeException("Insufficient Amount!!");
+        }
+        account.setBalance(account.getBalance() - amount);
+        Account savedAccount =  accountRepository.save(account);
+        return modelMapper.map(savedAccount, AccountDto.class);
+    }
 }

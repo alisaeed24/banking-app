@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DepositRequestDto {
+public class DepositDto {
     private Long id;
     private double amount;
 }

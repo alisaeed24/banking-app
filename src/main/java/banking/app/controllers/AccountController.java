@@ -2,7 +2,8 @@ package banking.app.controllers;
 
 import banking.app.dtos.AccountDto;
 import banking.app.dtos.CreateAccountDto;
-import banking.app.dtos.DepositRequestDto;
+import banking.app.dtos.DepositDto;
+import banking.app.dtos.WithdrawDto;
 import banking.app.services.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,8 +37,13 @@ public class AccountController {
     }
 
     @PutMapping("/deposit")
-    public ResponseEntity<AccountDto> deposit(@RequestBody DepositRequestDto request){
+    public ResponseEntity<AccountDto> deposit(@RequestBody DepositDto request){
         return new ResponseEntity<>(accountService.deposit(request.getId(), request.getAmount()), HttpStatus.OK);
+    }
+
+    @PutMapping("/withdraw")
+    public ResponseEntity<AccountDto> withdraw(@RequestBody WithdrawDto request){
+        return new ResponseEntity<>(accountService.withdraw(request.getId(), request.getAmount()), HttpStatus.OK);
     }
 }
 
