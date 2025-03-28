@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
 public interface IAccountService {
 
     public AccountDto createAccount(CreateAccountDto createAccountDto);
+    public AccountDto getAccountById(Long id);
 }

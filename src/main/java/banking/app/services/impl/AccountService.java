@@ -33,4 +33,11 @@ public class AccountService implements IAccountService {
         System.out.println("Response DTO: " + responseDto); // Debug log
         return responseDto;
     }
+
+    @Override
+    public AccountDto getAccountById(Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found with id: " + id));
+        return modelMapper.map(account, AccountDto.class);
+    }
 }

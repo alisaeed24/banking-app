@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/accounts")
@@ -25,4 +27,11 @@ public class AccountController {
     public ResponseEntity<AccountDto> addAccount(@RequestBody CreateAccountDto accountDto){
         return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
     }
+
+    @GetMapping("/getById")
+    public ResponseEntity<AccountDto> getById(@RequestBody Map<String, Long> request){
+        Long id = request.get("id");
+        return new ResponseEntity<>(accountService.getAccountById(id), HttpStatus.OK);
+    }
+
 }
