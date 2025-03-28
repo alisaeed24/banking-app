@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AccountService implements IAccountService {
 
@@ -21,6 +24,13 @@ public class AccountService implements IAccountService {
     public AccountService(AccountRepository accountRepository, ModelMapper modelMapper) {
         this.accountRepository = accountRepository;
         this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public List<AccountDto> getAll() {
+
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream().map((account -> modelMapper.map(account, AccountDto.class))).collect(Collectors.toList());
     }
 
     @Override
